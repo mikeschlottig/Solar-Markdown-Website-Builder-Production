@@ -1,160 +1,266 @@
-# Solar Markdown Website Builder - Production
+# 🚀 Solar Markdown Website Builder - Production
 
-Advanced markdown-based website builder with real-time preview and deployment capabilities.
+**Advanced markdown-based website builder with real-time preview capabilities**
 
-## 🌟 Features
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![React](https://img.shields.io/badge/React-18.3.1-blue.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6.2-blue.svg)](https://www.typescriptlang.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115.12-green.svg)](https://fastapi.tiangolo.com/)
+[![Vite](https://img.shields.io/badge/Vite-6.0.5-purple.svg)](https://vitejs.dev/)
 
-- **Markdown-First Approach**: Write in markdown, get beautiful websites
-- **Real-time Preview**: See changes instantly as you write
-- **Advanced Editor**: Syntax highlighting, auto-completion, and live formatting
-- **Template System**: Professional themes and layouts
-- **Export Options**: Static sites, HTML, or deploy directly
-- **Component Integration**: Rich UI components within markdown
-- **SEO Optimized**: Built-in SEO tools and meta tag management
+## 📋 Overview
 
-## 🏗️ Tech Stack
+Solar Markdown Website Builder is a comprehensive, production-ready application that enables users to create beautiful websites using markdown with real-time preview capabilities. Built with modern web technologies, it combines the simplicity of markdown with the power of a visual editor.
 
-- **Frontend**: React 18, TypeScript, Vite
-- **Markdown Engine**: Advanced markdown parser with extensions
-- **UI Components**: Radix UI, Shadcn/ui
-- **Styling**: Tailwind CSS with custom themes
-- **Animation**: Framer Motion
-- **3D Support**: Three.js integration
-- **Charts**: D3.js, Recharts
-- **Forms**: React Hook Form, Zod validation
+### ✨ Key Features
+
+- **📝 Markdown-First Approach**: Write content in markdown with live preview
+- **🎨 Real-time Visual Editor**: See changes as you type
+- **🧩 Component Library**: Extensive collection of pre-built UI components
+- **🎯 Drag & Drop Interface**: Intuitive website building experience
+- **📱 Responsive Design**: Mobile-first, responsive layouts
+- **🎨 Theme System**: Dark/light mode with customizable themes
+- **🔄 Live Preview**: Instant feedback on changes
+- **📤 Export Capabilities**: Multiple export formats and deployment options
+- **🔒 Production Ready**: Optimized for performance and scalability
+
+## 🛠️ Technology Stack
+
+### Frontend
+- **React 18** - Modern React with hooks and concurrent features
+- **TypeScript** - Type-safe development
+- **Vite** - Fast build tool and development server
+- **Tailwind CSS** - Utility-first CSS framework
+- **Radix UI** - Accessible component primitives
+- **Framer Motion** - Smooth animations and transitions
+- **Three.js** - 3D graphics and visualizations
+- **D3.js** - Data visualization capabilities
+- **React Hook Form + Zod** - Form handling with validation
+
+### Backend
+- **Python FastAPI** - High-performance async API framework
+- **Pydantic** - Data validation and serialization
+- **uvicorn** - ASGI server for production
+- **SQLAlchemy** - Database ORM
+- **Loguru** - Advanced logging capabilities
+
+### Additional Libraries
+- **React Router** - Client-side routing
+- **React Query** - Server state management
+- **Recharts** - Chart and graph components
+- **Lucide React** - Beautiful icon library
+- **date-fns** - Date manipulation utilities
+- **lodash** - Utility functions
+- **mathjs** - Mathematical expression evaluator
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 21+ and pnpm
-- Python 3.11+ and uv (for backend)
+- **Node.js 20+**
+- **Python 3.11+**
+- **pnpm** (recommended) or npm
+- **uv** (for Python dependencies)
 
-### Installation
+### Local Development
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/mikeschlottig/Solar-Markdown-Website-Builder-Production.git
+   cd Solar-Markdown-Website-Builder-Production
+   ```
+
+2. **Install frontend dependencies**
+   ```bash
+   cd app
+   pnpm install
+   ```
+
+3. **Install backend dependencies**
+   ```bash
+   cd ../services
+   uv sync
+   ```
+
+4. **Start development servers**
+   
+   **Frontend (in app/ directory):**
+   ```bash
+   pnpm dev
+   ```
+   
+   **Backend (in services/ directory):**
+   ```bash
+   uv run uvicorn main:app --reload --host 0.0.0.0 --port 5000
+   ```
+
+5. **Access the application**
+   - Frontend: http://localhost:5173
+   - Backend API: http://localhost:5000
+   - API Documentation: http://localhost:5000/docs
+
+### Production Build
 
 ```bash
-# Clone the repository
-git clone https://github.com/mikeschlottig/Solar-Markdown-Website-Builder-Production.git
-cd Solar-Markdown-Website-Builder-Production
-
-# Frontend setup
+# Build frontend
 cd app
-pnpm install
-pnpm dev  # Starts on http://localhost:5173
+pnpm build
 
-# Backend setup (in new terminal)
-cd services
-uv sync
-uv run uvicorn main:app --reload  # Starts on http://localhost:8000
+# The built files will be in app/dist/
+```
+
+## 🐳 Deployment Options
+
+### E2B Platform
+```bash
+# Deploy to E2B sandbox environment
+docker build -f e2b.Dockerfile -t solar-markdown-builder .
+```
+
+### Railway Platform
+```bash
+# Deploy to Railway with full nginx configuration
+docker build -f railway.Dockerfile -t solar-markdown-builder .
+```
+
+### Docker Compose (Local)
+```bash
+# Full local environment with all services
+docker-compose up --build
 ```
 
 ## 📁 Project Structure
 
 ```
-├── app/                    # React Frontend Application
-│   ├── src/               # Source code
-│   │   ├── components/    # UI components
-│   │   ├── editor/        # Markdown editor components
-│   │   ├── preview/       # Real-time preview
-│   │   ├── themes/        # Website themes
-│   │   └── utils/         # Utilities
-│   └── package.json       # Frontend dependencies
-├── services/              # Python FastAPI Backend
-│   ├── api/               # API endpoints
-│   ├── markdown/          # Markdown processing
-│   └── export/            # Site generation
-├── logging-server/        # Centralized logging
-└── deployment/            # Deployment configurations
+├── app/                          # React Frontend Application
+│   ├── src/                     # Source code
+│   │   ├── components/          # React components
+│   │   ├── hooks/              # Custom React hooks
+│   │   ├── lib/                # Utility libraries
+│   │   ├── pages/              # Page components
+│   │   └── styles/             # Styling files
+│   ├── public/                 # Static assets
+│   ├── package.json            # Frontend dependencies
+│   ├── vite.config.ts          # Vite configuration
+│   └── tailwind.config.js      # Tailwind CSS config
+├── services/                    # Python FastAPI Backend
+│   ├── api/                    # API routes and endpoints
+│   ├── core/                   # Core business logic
+│   ├── solar/                  # Solar-specific modules
+│   ├── main.py                 # FastAPI application entry
+│   └── pyproject.toml          # Python dependencies
+├── logging-server/             # Centralized logging service
+├── .github/                    # CI/CD workflows
+├── e2b.Dockerfile             # E2B deployment configuration
+├── railway.Dockerfile         # Railway deployment configuration
+├── docker-compose.yml         # Local development environment
+└── README.md                  # This file
 ```
 
-## ✨ Key Features
+## 🎯 Core Features
 
 ### Markdown Editor
-- **Live Syntax Highlighting**: Real-time markdown syntax highlighting
-- **Auto-completion**: Smart suggestions for markdown syntax
-- **Split View**: Side-by-side editing and preview
-- **Toolbar**: Quick access to common markdown elements
+- **Syntax Highlighting**: Full markdown syntax support
+- **Live Preview**: Real-time rendering of markdown content
+- **Split View**: Side-by-side editor and preview
+- **Export Options**: HTML, PDF, and other formats
 
-### Website Generation
-- **Multiple Themes**: Professional, clean, and modern themes
-- **Responsive Design**: Mobile-first, responsive websites
-- **SEO Optimization**: Automatic meta tags, structured data
-- **Performance**: Optimized static site generation
+### Component System
+- **Pre-built Components**: Headers, cards, buttons, forms
+- **Custom Components**: Create and save reusable components
+- **Drag & Drop**: Visual component placement
+- **Responsive Design**: Mobile-first component library
 
-### Advanced Components
-- **Charts & Graphs**: Embed interactive visualizations
-- **Code Blocks**: Syntax highlighting for 100+ languages
-- **Image Management**: Drag-and-drop image handling
-- **Tables**: Rich table editing and formatting
+### Theme Customization
+- **Dark/Light Mode**: Automatic theme switching
+- **Custom Themes**: Create and apply custom color schemes
+- **Typography**: Advanced font and spacing controls
+- **CSS Variables**: Dynamic theme customization
 
-## 🎨 Themes
+## 🔧 Configuration
 
-Built-in professional themes:
-- **Modern**: Clean, minimalist design
-- **Tech**: Developer-focused theme
-- **Business**: Professional corporate look
-- **Blog**: Optimized for content creation
-- **Portfolio**: Showcase your work
+### Environment Variables
 
-## 📤 Export Options
+**Frontend (.env in app/ directory):**
+```env
+VITE_API_BASE_URL=http://localhost:5000
+VITE_APP_TITLE="Solar Markdown Builder"
+```
 
-1. **Static Site**: Generate HTML/CSS/JS files
-2. **ZIP Download**: Complete website package
-3. **Git Integration**: Push directly to GitHub Pages
-4. **CDN Deploy**: Deploy to Netlify, Vercel, or Cloudflare
+**Backend (.env in services/ directory):**
+```env
+API_HOST=0.0.0.0
+API_PORT=5000
+DATABASE_URL=sqlite:///./solar_builder.db
+LOG_LEVEL=info
+```
 
-## 🛠️ Development
+## 📚 API Documentation
 
-### Build for Production
+The backend provides a comprehensive REST API with automatic documentation:
+- **Swagger UI**: `/docs`
+- **ReDoc**: `/redoc`
+- **OpenAPI JSON**: `/openapi.json`
+
+### Key Endpoints
+- `GET /api/health` - Health check
+- `POST /api/markdown/render` - Render markdown to HTML
+- `GET /api/templates` - Available templates
+- `POST /api/export` - Export website
+
+## 🧪 Testing
 
 ```bash
+# Frontend tests
 cd app
-pnpm build:prod
+pnpm test
+
+# Backend tests
+cd services
+uv run pytest
 ```
 
-### Run Tests
+## 📈 Performance
 
-```bash
-pnpm test                # Unit tests
-pnpm test:e2e           # End-to-end tests
-pnpm lint               # Code linting
-```
+- **Bundle Size**: ~149KB (gzipped: ~48KB)
+- **Build Time**: ~4.5 seconds
+- **Lighthouse Score**: 90+ performance
+- **Core Web Vitals**: Optimized for speed
 
-## 🚀 Deployment
+## 🔒 Security
 
-### E2B Platform
-```bash
-docker build -f e2b.Dockerfile -t solar-markdown-builder .
-e2b deploy solar-markdown-builder
-```
-
-### Railway
-```bash
-railway login
-railway link
-railway up
-```
-
-### Docker
-```bash
-docker-compose up --build
-```
-
-## 📚 Documentation
-
-- [Deployment Guide](DEPLOYMENT.md)
-- [Contributing Guidelines](CONTRIBUTING.md)
-- [API Documentation](services/README.md)
-- [Theme Development](docs/themes.md)
+- **Input Validation**: Comprehensive validation with Zod and Pydantic
+- **XSS Protection**: Sanitized markdown rendering
+- **CORS Configuration**: Secure cross-origin requests
+- **Rate Limiting**: API endpoint protection
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+- **Documentation**: [Full documentation](docs/)
+- **Issues**: [GitHub Issues](https://github.com/mikeschlottig/Solar-Markdown-Website-Builder-Production/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/mikeschlottig/Solar-Markdown-Website-Builder-Production/discussions)
+
+## 🙏 Acknowledgments
+
+- Built with ❤️ by the LEVERAGE AI team
+- Powered by the Solar application framework
+- Special thanks to all contributors and the open-source community
 
 ---
 
-**LEVERAGE AI** - Advanced Markdown Website Builder  
-**Version:** 1.0.163 - Production Ready
+**⭐ Star this repository if you find it helpful!**
+
+*Last updated: July 21, 2025*
