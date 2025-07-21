@@ -1,16 +1,14 @@
 {
   "name": "solar-markdown-website-builder",
   "private": true,
-  "version": "1.0.163",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Advanced markdown-based website builder with real-time preview - Solar Production",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:prod": "vite build --mode production",
-    "preview": "vite preview",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint . --ext ts,tsx --fix",
-    "type-check": "tsc --noEmit"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
