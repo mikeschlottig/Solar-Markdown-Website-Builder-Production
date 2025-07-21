@@ -1,0 +1,107 @@
+version: '3.8'
+
+services:
+  # React Frontend Development Server
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_BASE_URL=http://localhost:5000
+      - VITE_APP_TITLE=Solar Markdown Builder - Dev
+    depends_on:
+      - backend
+    networks:
+      - solar-network
+
+  # Python FastAPI Backend
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./services:/services
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=5000
+      - LOG_LEVEL=debug
+      - DATABASE_URL=sqlite:///./dev_solar_builder.db
+      - CORS_ORIGINS=["http://localhost:5173"]
+    networks:
+      - solar-network
+
+  # Logging Server (Optional)
+  logging:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: logging
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./logging-server:/logging-server
+      - ./logs:/logs
+    environment:
+      - LOG_PORT=3001
+      - LOG_LEVEL=info
+    networks:
+      - solar-network
+
+  # Redis Cache (Optional)
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - solar-network
+
+  # PostgreSQL Database (Optional - for production)
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=solar_builder
+      - POSTGRES_USER=solar_user
+      - POSTGRES_PASSWORD=solar_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - solar-network
+
+volumes:
+  redis_data:
+  postgres_data:
+
+networks:
+  solar-network:
+    driver: bridge
+
+# Development override (uncomment for development)
+# Use: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+---
+# docker-compose.dev.yml content:
+# version: '3.8'
+# services:
+#   frontend:
+#     environment:
+#       - NODE_ENV=development
+#       - VITE_ENABLE_DEBUG=true
+#   backend:
+#     environment:
+#       - PYTHON_ENV=development
+#       - DEBUG=true
+#       - RELOAD=true
