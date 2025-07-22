@@ -27,7 +27,7 @@ const Root = () => {
           clientId={"1d0781e3-205e-4c89-9818-90dc9e157eb9"}
           baseInfranodeUrl={"api.solarapp.dev"}
           loginRedirectUrl={"https://solarapp.dev/external-login"}
-          appName={"App Name"}
+          appName={"Solar Markdown Website Builder"}
       >
         <BrowserRouter>
           <Routes>
